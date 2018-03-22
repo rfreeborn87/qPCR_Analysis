@@ -3,6 +3,7 @@
 #For files with only one sheet_names
 import pandas as pd
 df = pd.read_excel("E:/OneDrive/Research/Rockwell_Lab/Python/092017_Influenza_Diet_Secondary_IFNg_Blimp-1_RF.xls")
+print(df.columns)
 #print(df.head())
 #To facilitate working with multiple sheets from the same file, the ExcelFile class can be used to wrap the file and can be passed into read_excel
 #xlsx = pd.ExcelFile('path_to_file.xls')
