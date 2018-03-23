@@ -2,15 +2,12 @@
 
 #For files with only one sheet_names
 import pandas as pd
-df = pd.read_excel("E:/OneDrive/Research/Rockwell_Lab/Python/092017_Influenza_Diet_Secondary_IFNg_Blimp-1_RF.xls", index_col = 0)
+df = pd.read_excel("E:/OneDrive/Research/Rockwell_Lab/Python/092017_Influenza_Diet_Secondary_IFNg_Blimp-1_RF.xls", header = 7)#index_col = 0)
 #This will print the name of each column
-print(df.columns[0])
-print(len(df))
+#print(df.columns[0])
+#print(len(df))
 
-#df2 = df.set_index("Block Type", drop = False)
-#print(df2)
 
-#print(df.head())
 #To facilitate working with multiple sheets from the same file, the ExcelFile class can be used to wrap the file and can be passed into read_excel
 #xlsx = pd.ExcelFile('path_to_file.xls')
 #df = pd.read_excel(xlsx, 'Sheet1')
@@ -18,7 +15,7 @@ print(len(df))
 #To write a new excel file
 #df.to_excel('path_to_file.xlsx', sheet_name='Sheet1')
 df.to_excel("E:/OneDrive/Research/Rockwell_Lab/Python/092017_Influenza_Diet_Secondary_IFNg_Blimp-1_RF.xlsx",sheet_name="Cool")
-#df2.to_excel("E:/OneDrive/Research/Rockwell_Lab/Python/092017_Influenza_Diet_Secondary_IFNg_Blimp-1_RF_indexed.xlsx",sheet_name="Cool")
+
 """#In order to write separate DataFrames to separate sheets in a single Excel file, one can pass an ExcelWriter.
 with ExcelWriter('path_to_file.xlsx') as writer:
     df1.to_excel(writer, sheet_name='Sheet1')
@@ -48,4 +45,7 @@ Out[44]:
 2013-01-03 -0.861849 -2.104569 -0.494929  1.071804   two
 2013-01-05 -0.424972  0.567020  0.276232 -1.087401  four
 """
-#print(df.loc[index.value("RPL13a")])
+#Make the target name the index
+df_indexed = df.set_index("Target Name",drop = False)
+df_indexed.to_excel("E:/OneDrive/Research/Rockwell_Lab/Python/092017_Influenza_Diet_Secondary_IFNg_Blimp-1_RF_indexed.xlsx",sheet_name="Cool")
+df_indexed.loc['RPL13a'].to_excel("E:/OneDrive/Research/Rockwell_Lab/Python/test_excel_file.xlsx",sheet_name = "RPL13a")
