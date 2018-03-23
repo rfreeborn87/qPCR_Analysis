@@ -23,12 +23,12 @@ with ExcelWriter('path_to_file.xlsx') as writer:
 
 #For more information, see the pandas tutorial at http://pandas-docs.github.io/pandas-docs-travis/io.html#writing-excel-files
 """
-For filtering excel data:
-This is just making a new dataframe to work with called df2
+#For filtering excel data:
+#This is just making a new dataframe to work with called df2
 In [41]: df2 = df.copy()
-This creates column E of the dataframe
+#This creates column E of the dataframe
 In [42]: df2['E'] = ['one', 'one','two','three','four','three']
-This prints the dataframe.
+#This prints the dataframe.
 In [43]: df2
 Out[43]: 
                    A         B         C         D      E
@@ -45,7 +45,27 @@ Out[44]:
 2013-01-03 -0.861849 -2.104569 -0.494929  1.071804   two
 2013-01-05 -0.424972  0.567020  0.276232 -1.087401  four
 """
+
+
 #Make the target name the index
 df_indexed = df.set_index("Target Name",drop = False)
+#Write indexed DataFrame to file.
 df_indexed.to_excel("E:/OneDrive/Research/Rockwell_Lab/Python/092017_Influenza_Diet_Secondary_IFNg_Blimp-1_RF_indexed.xlsx",sheet_name="Cool")
+#Write only the rows containing RPL13a in the index to file.
 df_indexed.loc['RPL13a'].to_excel("E:/OneDrive/Research/Rockwell_Lab/Python/test_excel_file.xlsx",sheet_name = "RPL13a")
+
+#I am going to test filtering to see if I can subtract Ct of target from Ct of RPL13a.
+#This goes through each column.
+#for i in df_indexed:
+    #If the column is the Ct, print out the column.
+    #if i == "Cт":
+        #Print the whole column.
+        #print(df_indexed[i])
+listicle = []
+n = 0
+while n < len(df_indexed):
+    listicle.append(df_indexed.iloc[n,df_indexed["Cт"]])
+    n += 1
+
+print(listicle)
+        
